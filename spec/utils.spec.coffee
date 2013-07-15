@@ -1,36 +1,35 @@
 describe 'utils', ->
 
-	describe 'adjustValue', ->
+	describe '_fixValue', ->
 		it 'should return the value string with 2 decimals', ->
-			expect(_.adjustValue(123)).toEqual('123.00')
-			expect(_.adjustValue(123.45)).toEqual('123.45')
-			expect(_.adjustValue(123.451)).toEqual('123.45')
-			expect(_.adjustValue(-123)).toEqual('-123.00')
+			expect(_._fixValue(123)).toEqual('123.00')
+			expect(_._fixValue(123.45)).toEqual('123.45')
+			expect(_._fixValue(123.451)).toEqual('123.45')
+			expect(_._fixValue(-123)).toEqual('-123.00')
 
 		it 'should return the absolute value when options.absolute is true', ->
-			expect(_.adjustValue(-123, absolute: true)).toEqual('123.00')
+			expect(_._fixValue(-123, absolute: true)).toEqual('123.00')
 
 
 	describe 'formatCurrency', ->
 		it ''
 
 
-	describe 'getCurrencySymbol', ->
+	describe '_getCurrencySymbol', ->
 		it 'should default to R$ when vtex.i18n is undefined', ->
 			window.vtex = undefined
-			expect(_.getCurrencySymbol()).toEqual('R$ ')
+			expect(_._getCurrencySymbol()).toEqual('R$ ')
 
-
-	describe 'getDecimalSeparator', ->
+	describe '_getDecimalSeparator', ->
 		it 'should default to . when vtex.i18n is undefined', ->
 			window.vtex = undefined
-			expect(_.getDecimalSeparator()).toEqual(',')
+			expect(_._getDecimalSeparator()).toEqual(',')
 
 
-	describe 'getThousandsSeparator', ->
+	describe '_getThousandsSeparator', ->
 		it 'should default to , when vtex.i18n is undefined', ->
 			window.vtex = undefined
-			expect(_.getThousandsSeparator()).toEqual('.')
+			expect(_._getThousandsSeparator()).toEqual('.')
 
 
 	describe 'pad', ->
@@ -64,14 +63,14 @@ describe 'utils', ->
 
 	describe 'getCookieValue', ->
 		beforeEach ->
-			window.cookie = 'a=b&c=d'
+			@cook = 'a=b&c=d'
 
 		it 'should return undefined for an invalid name', ->
-			expect(_.getCookieValue(cookie, 'abc')).not.toBeDefined()
+			expect(_.getCookieValue(@cook, 'abc')).not.toBeDefined()
 
 		it 'should return the corresponding value for a valid name', ->
-			expect(_.getCookieValue(cookie, 'a')).toEqual('b')
-			expect(_.getCookieValue(cookie, 'c')).toEqual('d')
+			expect(_.getCookieValue(@cook, 'a')).toEqual('b')
+			expect(_.getCookieValue(@cook, 'c')).toEqual('d')
 
 
 	describe 'capitalizeWord', ->

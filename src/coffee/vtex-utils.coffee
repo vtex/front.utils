@@ -1,31 +1,19 @@
 utils =
-	adjustValue: (value, options = {}) ->
-		value = -value if options.absolute and value < 0
-		value = value.toFixed(2)
-		value
 
 	formatCurrency: (value, options = {}) ->
-		value = @adjustValue(value, options)
+		value = @_fixValue(value, options)
 
-		decimalSeparator = options.decimalSeparator or @getDecimalSeparator()
-		thousandsSeparator = options.thousandsSeparator or @getThousandsSeparator()
+		decimalSeparator = options.decimalSeparator or @_getDecimalSeparator()
+		thousandsSeparator = options.thousandsSeparator or @_getThousandsSeparator()
 
 		[wholePart, decimalPart] = value.split('.')
 		wholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator)
 
 		wholePart + decimalSeparator + decimalPart
 
-	getCurrencySymbol: ->
-		window.vtex?.i18n?.getCurrencySymbol() or 'R$ '
 
-	getDecimalSeparator: ->
-		window.vtex?.i18n?.getDecimalSeparator() or ','
-
-	getThousandsSeparator: ->
-		window.vtex?.i18n?.getThousandsSeparator() or '.'
-
-	intAsCurrency: ( value, options = {} ) ->
-		@getCurrencySymbol() + utils.formatCurrency(value/100, options)
+	intAsCurrency: (value, options = {}) ->
+		(options.currencySymbol or @_getCurrencySymbol()) + utils.formatCurrency(value/100, options)
 
 	pad: (str, max) ->
 		return str if (str+"").length >= max
@@ -123,6 +111,29 @@ utils =
 			hashed = hashed & hashed # Convert to 32bit integer
 		hashed
 
+	#
+	# PRIVATE
+	#
+	_getCurrencySymbol: ->
+		window.vtex?.i18n?.getCurrencySymbol() or 'R$ '
+
+	_getDecimalSeparator: ->
+		window.vtex?.i18n?.getDecimalSeparator() or ','
+
+	_getThousandsSeparator: ->
+		window.vtex?.i18n?.getThousandsSeparator() or '.'
+
+	_fixValue: (value, options = {}) ->
+		value = -value if options.absolute and value < 0
+		value = value.toFixed(2)
+		value
+
+	_extend: (obj, sources...) ->
+		for source in sources when source
+			obj[prop] = source[prop] for prop of source
+
+		return obj
+
 # exports
 if window._
 	window._.mixin(utils)
@@ -130,8 +141,4 @@ else
 	window._ = utils
 
 	# polyfill for Underscores's extend
-	window._.extend = (obj, sources...) ->
-		for source in sources when source
-			obj[prop] = source[prop] for prop of source
-
-		return obj
+	window._.extend = utils._extend
