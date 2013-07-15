@@ -63,6 +63,9 @@ utils =
 	capitalizeWord: (word = '') ->
 		word.charAt(0).toUpperCase() + word.slice(1)
 
+	capitalize: (word = '') ->
+		capitalizeWord(word)
+
 	capitalizeSentence: (sentence = '') ->
 		oldWords = sentence.toLowerCase().split(' ')
 		newWords = (@capitalizeWord(word) for word in oldWords)
@@ -110,6 +113,12 @@ utils =
 			hashed = ((hashed << 5) - hashed) + charcode
 			hashed = hashed & hashed # Convert to 32bit integer
 		hashed
+
+	mapObj: (obj, f) ->
+		obj2 = {}
+		for own k, v of obj
+			obj2[k] = f k, v
+		obj2
 
 	#
 	# PRIVATE
