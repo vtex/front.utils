@@ -100,5 +100,8 @@ describe 'utils', ->
 		it 'should planify characters', ->
 			expect(_.plainChars('ąàáäâãåæćęèéëêìíïîłńòóöôõøśùúüûñçżź')).toEqual('aaaaaaaaceeeeeiiiilnoooooosuuuunczz')
 
+		it 'should planify even if the characters are repeated', ->
+			expect(_.plainChars('ąąąąą')).toEqual('aaaaa')
+
 		it 'should not modify other characters', ->
 			expect(_.plainChars('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%¨&*()')).toEqual('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%¨&*()')
