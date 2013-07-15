@@ -91,14 +91,23 @@ utils =
 			return info
 
 	plainChars: (str) ->
-		if not str? then throw(new Error("plainChars needs a param"))
+		return if not str?
 
 		specialChars = 	"ąàáäâãåæćęèéëêìíïîłńòóöôõøśùúüûñçżź"
 		plain = "aaaaaaaaceeeeeiiiilnoooooosuuuunczz"
-		regex = new RegExp '[' + specialChars + ']', 'g'
+		regex = new RegExp "[#{specialChars}]", 'g'
 
 		str += ""
 		str.replace regex, (char) -> plain.charAt(specialChars.indexOf char)
+
+	# Sanitizes text: "Caçoá (teste 2)" becomes "Cacoateste2"
+	sanitize = (str) ->
+		plainChars str.replace(/\s/g, '')
+		.replace(/\/|\\/g, '-')
+		.replace(/\(|\)|\'|\"/g, '')
+		.toLowerCase()
+		.replace(/\,/g, 'V')
+		.replace(/\./g, 'P')
 
 	hash: (str) ->
 		hashed = 0
