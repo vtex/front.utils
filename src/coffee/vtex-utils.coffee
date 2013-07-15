@@ -101,7 +101,7 @@ utils =
 		str.replace regex, (char) -> plain.charAt(specialChars.indexOf char)
 
 	# Sanitizes text: "Caçoá (teste 2)" becomes "Cacoateste2"
-	sanitize = (str) ->
+	sanitize: (str) ->
 		plainChars str.replace(/\s/g, '')
 		.replace(/\/|\\/g, '-')
 		.replace(/\(|\)|\'|\"/g, '')
