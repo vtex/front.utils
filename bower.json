@@ -1,0 +1,14 @@
+{
+  "name": "front.utils",
+  "version": "0.1.0",
+  "main": "src/coffee/vtex-utils.coffee",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests",
+    "spec"
+  ]
+}
