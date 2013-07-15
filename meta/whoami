@@ -1,4 +1,4 @@
 {
-  "roots": ["/admin/speedbag"],
+  "roots": ["/io/futils"],
   "hosts": ["vtexcommerce.com.br", "vtexcommercebeta.com.br"]
 }

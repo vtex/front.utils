@@ -1,6 +1,6 @@
 {
-	"name": "speedbag",
-	"version": "0.2.0",
+	"name": "front.utils",
+	"version": "0.1.0",
 	"readmeFilename": "README.md",
 	"description": "A grunt coffee/less/live-reload/cssmin/uglify/connect/bootstrap/zepto/lodash boilerplate.",
 	"main": "index.html",
@@ -24,14 +24,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/vtex/speedbag.git"
+		"url": "git://github.com/vtex/front.utils.git"
 	},
 	"keywords": [
-		"grunt",
 		"coffee",
-		"less",
-		"livereload"
+    "utils",
+    "front"
 	],
-	"author": "Guilherme Rodrigues <gadr90@gmail.com>",
+	"author": "",
 	"license": "MIT"
 }
