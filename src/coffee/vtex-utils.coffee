@@ -54,12 +54,6 @@ utils =
 		part1 = parts[1] - 1
 		return new Date(parts[0], part1, parts[2], parts[3], parts[4], parts[5]);
 
-	isAddressEmpty: (address, requiredAttributes = ["addressType", "addressId", "receiverName", "postalCode", "street", "neighborhood", "city", "state", "country", "number"]) ->
-		for attr in requiredAttributes
-			unwrapped = ko.utils.safeUnwrapObservable(address[attr])
-			return true if unwrapped is undefined or unwrapped is null or unwrapped.toString().replace(/_|-/g, '').length is 0
-		return false
-
 	capitalizeWord: (word = '') ->
 		word.charAt(0).toUpperCase() + word.slice(1)
 
