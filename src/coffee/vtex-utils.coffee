@@ -102,7 +102,7 @@ utils =
 
 	# Sanitizes text: "Caçoá (teste 2)" becomes "Cacoateste2"
 	sanitize: (str) ->
-		plainChars str.replace(/\s/g, '')
+		@plainChars str.replace(/\s/g, '')
 		.replace(/\/|\\/g, '-')
 		.replace(/\(|\)|\'|\"/g, '')
 		.toLowerCase()
