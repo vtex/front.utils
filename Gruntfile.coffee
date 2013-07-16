@@ -184,6 +184,9 @@ module.exports = (grunt) ->
 	# TDD
 	grunt.registerTask 'tdd', ['dev', 'connect', 'karma:unit', 'remote', 'watch:test']
 
+	# TODO DISTRIBUTION TASK (TO BE USED BEFORE COMMIT)
+	# grunt.registerTask 'dist'
+
 	# Tasks for deploy build
 	grunt.registerTask 'gen-commit', ['clean', 'copy:main', 'coffee', 'less', 'copy:debug',
 																		'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'copy:commit', 'string-replace:commit']
