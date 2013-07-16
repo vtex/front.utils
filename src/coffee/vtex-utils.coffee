@@ -109,6 +109,9 @@ utils =
 		.replace(/\,/g, 'V')
 		.replace(/\./g, 'P')
 
+	spacesToHyphens: (str) ->
+		str.replace(/\ /g, '-')
+
 	hash: (str) ->
 		hashed = 0
 		for char in str
