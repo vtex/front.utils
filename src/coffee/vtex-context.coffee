@@ -1,16 +1,24 @@
-class VtexContext
+class Context
+	whitelist: ['showErrorLog']
+	rules: [/^VTEX\_.*/g]
 
-	# Recebe um nome e preenche vtex.context com todos os cookies que tem esse nome
-	getContextByCookieName: (name) ->
-		window.vtex.context.cookie utils.readCookie(name)?
+	constructor: ->
+		cookiesContextOptions = @searchCookies(@whitelist, @rules)
+		queryStringContextOptions = @searchQueryString(@whitelist, @rules)
+		localStorageContextOptions = @searchLocalStorage(@whitelist, @rules)
+		_.extend(this, cookiesContextOptions, queryStringContextOptions, localStorageContextOptions)
 
-	# Recebe um modo e preenche vtex.context com todas as queryString que tem esse modo
-	getContextByQueryStringMode: (mode) ->
-		qsArray = window.location.search
-		for key in qsArray
-			qs = utils.urlParams()
-			window.vtex.context.queryString qs.mode if qs.mode is mode
+	# Returns cookie maps
+	searchCookies: (whitelist, rules) ->
+		# NOT IMPLEMENTED
 
-	getContextByLocalStorage: (name) ->
-		for value in localStorage
-			window.vtex.context.localStorage value if value is name
+	searchQueryString: (whitelist, rules) =>
+		if window.location.search.indexOf("showErrorLog=true")
+			@showErrorLog = true
+
+	searchLocalStorage: (whitelist, rules) ->
+		# NOT IMPLEMENTED
+
+window.vtex or= {}
+window.vtex.Context = Context
+window.vtex.context = new Context()
