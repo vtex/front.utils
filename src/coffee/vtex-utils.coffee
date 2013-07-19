@@ -1,4 +1,5 @@
-utils =
+class Utils
+
 
 	###
 	Formats monetary value as a string with decimal and thousands separators
@@ -19,7 +20,7 @@ utils =
   	formatCurrency(-1050.99, {'decimalSeparator': '.', 'thousandsSeparator': ',', 'absolute': true, 'decimalPlaces': 3}
   	#=> '1,050.990'
   ###
-	formatCurrency: (value, options) ->
+	formatCurrency: (value, options) =>
 		defaults =
 			decimalSeparator: @_getDecimalSeparator()
 			thousandsSeparator: @_getThousandsSeparator()
@@ -36,7 +37,7 @@ utils =
 		wholePart + opts.decimalSeparator + decimalPart
 
 
-	intAsCurrency: (value, options) ->
+	intAsCurrency: (value, options) =>
 		(options.currencySymbol or @_getCurrencySymbol()) + utils.formatCurrency(value/100, options)
 
 	###
@@ -57,7 +58,7 @@ utils =
   	pad('Hello', 7, {'char': ' ', 'position': 'right'})
   	#=> 'Hello  '
 	###
-	pad: (str, max, options) ->
+	pad: (str, max, options) =>
 		defaults =
 			char: '0'
 			position: 'left'
@@ -82,7 +83,7 @@ utils =
   	readCookie(b)
   	#=> 'xyz'
   ###
-	readCookie: (name) ->
+	readCookie: (name) =>
 		ARRcookies = document.cookie.split(";")
 		for pair in ARRcookies
 			key = pair.substr(0, pair.indexOf("=")).replace(/^\s+|\s+$/g, "")
@@ -105,7 +106,7 @@ utils =
   	getCookieValue(c, 'c')
   	#=> 'd'
   ###
-	getCookieValue: (cookie, name) ->
+	getCookieValue: (cookie, name) =>
 		subcookies = cookie.split("&")
 		for subcookie in subcookies
 			key = subcookie.substr(0, subcookie.indexOf("="))
@@ -123,7 +124,7 @@ utils =
   	urlParam()
   	#=> {'a': 'b', 'c': 'hello = hi'}
   ###
-	urlParams: ->
+	urlParams: =>
 		params = {}
 		search = /([^&=]+)=?([^&]*)/g
 		plus = /\+/g
@@ -143,7 +144,7 @@ utils =
   	dateFromISO8601('1997-07-16T19:20:30')
   	#=> Date object ("Thu Jul 18 2013 15:08:08 GMT-0300 (BRT)")
   ###
-	dateFromISO8601: (isostr) ->
+	dateFromISO8601: (isostr) =>
 		parts = isostr.match(/\d+/g);
 		part1 = parts[1] - 1
 		return new Date(parts[0], part1, parts[2], parts[3], parts[4], parts[5]);
@@ -162,13 +163,13 @@ utils =
   	capitalizeWord(' hi ')
   	#=> ' hi '
 	###
-	capitalizeWord: (word = '') ->
+	capitalizeWord: (word = '') =>
 		word.charAt(0).toUpperCase() + word.slice(1)
 
 	###
-  See [capitalizeWord].
+  @see {Utils#capitalizeWord}.
 	###
-	capitalize: (word = '') ->
+	capitalize: (word = '') =>
 		capitalizeWord(word)
 
 	###
@@ -181,12 +182,12 @@ utils =
   	capitalizeSentence('* hello world!')
   	#=> '* Hello Wordl!'
 	###
-	capitalizeSentence: (sentence = '') ->
+	capitalizeSentence: (sentence = '') =>
 		oldWords = sentence.toLowerCase().split(' ')
 		newWords = (@capitalizeWord(word) for word in oldWords)
 		newWords.join(' ')
 
-	maskString: (str, mask) ->
+	maskString: (str, mask) =>
 		# TODO clarificar
 		maskStr = mask.mask or mask
 		applyMask = (valueArray, maskArray, fixedCharsReg) ->
@@ -206,10 +207,10 @@ utils =
   @return [String] the masked string
 
   @example Default usage
-  	maskInfo('abc***@g****.c**')
-  	#=> 'abc<span class="masked-info">*</span><span class="masked-info">*</span><span class="masked-info">*</span>@g<span class="masked-info">*</span><span class="masked-info">*</span><span class="masked-info">*</span><span class="masked-info">*</span>.c<span class="masked-info">*</span><span class="masked-info">*</span>'
+  	maskInfo('abc**')
+  	#=> 'abc<span class="masked-info">*</span><span class="masked-info">*</span>'
 	###
-	maskInfo: (info) ->
+	maskInfo: (info) =>
 		maskRegex = /\*/g;
 		maskText = '<span class="masked-info">*</span>';
 		if info
@@ -217,7 +218,7 @@ utils =
 		else
 			return info
 
-	plainChars: (str) ->
+	plainChars: (str) =>
 		return if not str?
 
 		specialChars = 	"ąàáäâãåæćęèéëêìíïîłńòóöôõøśùúüûñçżź"
@@ -228,7 +229,7 @@ utils =
 		str.replace regex, (char) -> plain.charAt(specialChars.indexOf char)
 
 	# Sanitizes text: "Caçoá (teste 2)" becomes "Cacoateste2"
-	sanitize: (str) ->
+	sanitize: (str) =>
 		@plainChars str.replace(/\s/g, '')
 		.replace(/\/|\\/g, '-')
 		.replace(/\(|\)|\'|\"/g, '')
@@ -246,7 +247,7 @@ utils =
   	spacesToHyphens("Branco e Preto")
   	#=> "Branco-e-Preto"
 	###
-	spacesToHyphens: (str) ->
+	spacesToHyphens: (str) =>
 		str.replace(/\ /g, '-')
 
 	###
@@ -259,7 +260,7 @@ utils =
   	uid = hash(Date.now())
   	#=> -707575924
   ###
-	hash: (str) ->
+	hash: (str) =>
 		hashed = 0
 		for char in str
 			charcode = char.charCodeAt(0)
@@ -281,7 +282,7 @@ utils =
   	});
   	#=> {a: 10, b: 20}
 	###
-	mapObj: (obj, f) ->
+	mapObj: (obj, f) =>
 		obj2 = {}
 		for own k, v of obj
 			obj2[k] = f k, v
@@ -290,26 +291,27 @@ utils =
 	#
 	# PRIVATE
 	#
-	_getCurrencySymbol: ->
+	_getCurrencySymbol: =>
 		window.vtex?.i18n?.getCurrencySymbol() or 'R$ '
 
-	_getDecimalSeparator: ->
+	_getDecimalSeparator: =>
 		window.vtex?.i18n?.getDecimalSeparator() or ','
 
-	_getThousandsSeparator: ->
+	_getThousandsSeparator: =>
 		window.vtex?.i18n?.getThousandsSeparator() or '.'
 
-	_extend: (obj, sources...) ->
+	_extend: (obj, sources...) =>
 		for source in sources when source
 			obj[prop] = source[prop] for prop of source
 
 		return obj
 
 # exports
-if window._
-	window._.mixin(utils)
+utils = new Utils()
+root = exports || window
+if root._?
+	root._.mixin(utils)
 else
-	window._ = utils
-
+	root._ = utils
 	# polyfill for Underscores's extend
-	window._.extend = utils._extend
+	root._.extend = utils._extend
