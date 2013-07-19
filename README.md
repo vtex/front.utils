@@ -1,6 +1,6 @@
 # VTEX Frontend Utils
 
-Documentation coming soon!
+For documentation, download and open doc/index.html
 
 ------
 

@@ -26,7 +26,11 @@ module.exports = (grunt) ->
 										 grunt.config('environmentType')].join('-')
 
 		# Tasks
-		clean: ['build']
+		clean:
+			main: ['build']
+			dist: ['build', 'doc', 'dist']
+
+
 		copy:
 			main:
 				expand: true
@@ -65,6 +69,13 @@ module.exports = (grunt) ->
 				dest: 'build/<%= relativePath %>/spec/'
 				ext: '.js'
 
+			dist:
+				expand: true
+				cwd: 'src/coffee'
+				src: ['**/*.coffee']
+				dest: 'dist/<%= relativePath %>/'
+				ext: '.js'
+
 		less:
 			main:
 				files:
@@ -75,6 +86,11 @@ module.exports = (grunt) ->
 
 		usemin:
 			html: 'build/<%= relativePath %>/index.html'
+
+		uglify:
+			dist:
+				files:
+					'dist/vtex-utils.min.js': 'dist/vtex-utils.js'
 
 		karma:
 			options:
@@ -132,6 +148,12 @@ module.exports = (grunt) ->
 						replacement: '<%= applicationRoot %>/'
 					]
 
+		shell:
+			codo:
+				command: 'codo'
+				options:
+					stdout: true
+
 		connect:
 			dev:
 				options:
@@ -166,6 +188,7 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-usemin'
 	grunt.loadNpmTasks 'grunt-string-replace'
 	grunt.loadNpmTasks 'grunt-karma'
+	grunt.loadNpmTasks 'grunt-shell'
 
 	grunt.registerTask 'default', ['dev-watch']
 
@@ -184,8 +207,8 @@ module.exports = (grunt) ->
 	# TDD
 	grunt.registerTask 'tdd', ['dev', 'connect', 'karma:unit', 'remote', 'watch:test']
 
-	# TODO DISTRIBUTION TASK (TO BE USED BEFORE COMMIT)
-	# grunt.registerTask 'dist'
+	# Dist
+	grunt.registerTask 'dist', ['clean', 'coffee:dist', 'uglify:dist', 'shell:codo']
 
 	# Tasks for deploy build
 	grunt.registerTask 'gen-commit', ['clean', 'copy:main', 'coffee', 'less', 'copy:debug',
