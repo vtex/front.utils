@@ -1,6 +1,16 @@
 # VTEX Frontend Utils
 
-For documentation, download and open doc/index.html
+## Documentation
+
+For documentation, please clone and open doc/index.html
+
+
+## Workflow
+
+Before doing git stuff, please:
+
+ - sudo grunt test
+ - sudo grunt dist
 
 ------
 
