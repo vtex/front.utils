@@ -1,7 +1,7 @@
 {
   "name": "front.utils",
-  "version": "0.1.0",
-  "main": "src/coffee/vtex-utils.coffee",
+  "version": "0.1.1",
+  "main": ["dist/vtex-utils.js", "dist/vtex-utils.min.js"],
   "ignore": [
     "**/.*",
     "node_modules",

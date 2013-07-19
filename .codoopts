@@ -1,0 +1,5 @@
+--name       "front.utils"
+--readme     README.md
+--title      "Front Utils Documentation"
+--cautious
+--output-dir ./doc

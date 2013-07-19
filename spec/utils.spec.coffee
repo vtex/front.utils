@@ -1,21 +1,16 @@
 describe 'utils', ->
 
-	describe '_fixValue', ->
+	describe 'formatCurrency', ->
 		it 'should return the value string with 2 decimals', ->
 			# Assert
-			expect(_._fixValue(123)).toEqual('123.00')
-			expect(_._fixValue(123.45)).toEqual('123.45')
-			expect(_._fixValue(123.451)).toEqual('123.45')
-			expect(_._fixValue(-123)).toEqual('-123.00')
+			expect(_.formatCurrency(123)).toEqual('123,00')
+			expect(_.formatCurrency(123.45)).toEqual('123,45')
+			expect(_.formatCurrency(123.451)).toEqual('123,45')
+			expect(_.formatCurrency(-123)).toEqual('-123,00')
 
 		it 'should return the absolute value when options.absolute is true', ->
 			# Assert
-			expect(_._fixValue(-123, absolute: true)).toEqual('123.00')
-
-
-	describe 'formatCurrency', ->
-		it ''
-
+			expect(_.formatCurrency(-123, absolute: true)).toEqual('123,00')
 
 	describe '_getCurrencySymbol', ->
 		it 'should default to R$ when vtex.i18n is undefined', ->
@@ -60,6 +55,22 @@ describe 'utils', ->
 			expect(_.pad('123', 5)).toEqual('00123')
 			expect(_.pad('abc', 4)).toEqual('0abc')
 			expect(_.pad('abc', 5)).toEqual('00abc')
+
+		it 'should pad strings with the given char', ->
+			# Arrange
+			options =
+				char: ' '
+
+			# Assert
+			expect(_.pad('123', 4, options)).toEqual(' 123')
+
+		it 'shoudl pad strings on the right', ->
+			#Arrange
+			options =
+   			position: 'right'
+
+			#Assert
+			expect(_.pad('123', 4, options)).toEqual('1230')
 
 
 	describe 'readCookie', ->
