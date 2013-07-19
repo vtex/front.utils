@@ -440,7 +440,7 @@
 
   utils = new Utils();
 
-  root = exports || window;
+  root = typeof exports !== "undefined" && exports !== null ? exports : window;
 
   if (root._ != null) {
     root._.mixin(utils);

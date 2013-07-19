@@ -308,7 +308,7 @@ class Utils
 
 # exports
 utils = new Utils()
-root = exports || window
+root = exports ? window
 if root._?
 	root._.mixin(utils)
 else
