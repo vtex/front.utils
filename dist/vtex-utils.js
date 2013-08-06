@@ -69,7 +69,7 @@
     };
 
     Utils.prototype.intAsCurrency = function(value, options) {
-      return (options.currencySymbol || this._getCurrencySymbol()) + utils.formatCurrency(value / 100, options);
+      return ((options != null ? options.currencySymbol : void 0) || this._getCurrencySymbol()) + utils.formatCurrency(value / 100, options);
     };
 
     /*
