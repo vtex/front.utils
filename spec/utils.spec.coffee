@@ -12,13 +12,13 @@ describe 'utils', ->
 			# Assert
 			expect(_.formatCurrency(-123, absolute: true)).toEqual('123,00')
 
-	describe '_getCurrencySymbol', ->
+	describe '_getCurrency', ->
 		it 'should default to R$ when vtex.i18n is undefined', ->
 			# Arrange
 			window.vtex = undefined
 
 			# Assert
-			expect(_._getCurrencySymbol()).toEqual('R$ ')
+			expect(_._getCurrency()).toEqual('R$ ')
 
 	describe '_getDecimalSeparator', ->
 		it 'should default to . when vtex.i18n is undefined', ->

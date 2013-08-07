@@ -38,7 +38,7 @@ class Utils
 
 
 	intAsCurrency: (value, options) =>
-		(options?.currencySymbol or @_getCurrencySymbol()) + utils.formatCurrency(value/100, options)
+		(options?.currencySymbol or @_getCurrency()) + utils.formatCurrency(value/100, options)
 
 	###
   Pads a string until it reaches a certain length. Non-strings will be converted.
@@ -291,8 +291,8 @@ class Utils
 	#
 	# PRIVATE
 	#
-	_getCurrencySymbol: =>
-		window.vtex?.i18n?.getCurrencySymbol() or 'R$ '
+	_getCurrency: =>
+		window.vtex?.i18n?.getCurrency() or 'R$ '
 
 	_getDecimalSeparator: =>
 		window.vtex?.i18n?.getDecimalSeparator() or ','
