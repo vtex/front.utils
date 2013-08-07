@@ -1,6 +1,6 @@
 {
   "name": "front.utils",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "main": ["dist/vtex-utils.js", "dist/vtex-utils.min.js"],
   "ignore": [
     "**/.*",
