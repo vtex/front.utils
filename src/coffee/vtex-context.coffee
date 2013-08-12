@@ -1,7 +1,5 @@
 class Context
-	whitelist: ['showErrorLog']
-	rules: [/^VTEX\_.*/g]
-
+	
 	constructor: ->
 		cookiesContextOptions = @searchCookies(@whitelist, @rules)
 		queryStringContextOptions = @searchQueryString(@whitelist, @rules)
