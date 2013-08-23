@@ -7,7 +7,7 @@ class Context
 		_.extend(this, cookiesContextOptions, queryStringContextOptions, localStorageContextOptions)
 
 	# Returns cookie maps
-	searchCookies: (whitelist, rules) ->
+	searchCookies: (whitelist = [], rules = []) ->
 		cookies = {}
 		cookiesArray = document.cookie.split(";")
 		for optionName in whitelist
@@ -21,12 +21,12 @@ class Context
 				cookies[cookieKey] = JSON.parse cookieValue if rule.test(cookieKey)
 		return cookies
 
-	searchQueryString: (whitelist, rules) =>
+	searchQueryString: (whitelist = [], rules = []) =>
 		qsArray = _.urlParams()
 		qs = @searchThrough(whitelist, rules, qsArray)?
 		return qs
 
-	searchLocalStorage: (whitelist, rules) =>
+	searchLocalStorage: (whitelist = [], rules = []) =>
 		lsArray = localStorage
 		ls = @searchThrough(whitelist, rules, lsArray)?
 		return ls
