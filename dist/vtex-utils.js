@@ -335,7 +335,9 @@
     };
 
     Utils.prototype.sanitize = function(str) {
-      return this.plainChars(str.replace(/\s/g, '').replace(/\/|\\/g, '-').replace(/\(|\)|\'|\"/g, '').toLowerCase().replace(/\,/g, 'V').replace(/\./g, 'P'));
+      var s;
+      s = this.plainChars(str.replace(/\s/g, '').replace(/\/|\\/g, '-').replace(/\(|\)|\'|\"/g, '').toLowerCase().replace(/\,/g, 'V').replace(/\./g, 'P'));
+      return s.charAt(0).toUpperCase() + s.slice(1);
     };
 
     /*

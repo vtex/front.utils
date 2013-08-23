@@ -230,12 +230,13 @@ class Utils
 
 	# Sanitizes text: "Caçoá (teste 2)" becomes "Cacoateste2"
 	sanitize: (str) =>
-		@plainChars str.replace(/\s/g, '')
+		s = @plainChars str.replace(/\s/g, '')
 		.replace(/\/|\\/g, '-')
 		.replace(/\(|\)|\'|\"/g, '')
 		.toLowerCase()
 		.replace(/\,/g, 'V')
 		.replace(/\./g, 'P')
+		return s.charAt(0).toUpperCase() + s.slice(1)
 
 	###
 	Replaces all space charactes with hyphen characters

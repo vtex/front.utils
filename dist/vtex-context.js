@@ -3,10 +3,6 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   Context = (function() {
-    Context.prototype.whitelist = ['showErrorLog'];
-
-    Context.prototype.rules = [/^VTEX\_.*/g];
-
     function Context() {
       this.searchLocalStorage = __bind(this.searchLocalStorage, this);
       this.searchQueryString = __bind(this.searchQueryString, this);
