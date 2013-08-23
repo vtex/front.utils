@@ -4,7 +4,7 @@ module.exports = (grunt) ->
 	grunt.initConfig
 		clean:
 			main: ['build']
-			dist: ['build', 'doc', 'dist']
+			dist: ['doc', 'dist']
 
 		copy:
 			main:
@@ -12,6 +12,10 @@ module.exports = (grunt) ->
 				cwd: 'src/'
 				src: ['**', '!coffee/**', '!**/*.less']
 				dest: 'build/<%= relativePath %>'
+			dist:
+				files:
+					'dist/vtex-context.js': 'build/js/vtex-context.js'
+					'dist/vtex-utils.js': 'build/js/vtex-utils.js'
 
 		coffee:
 			main:
@@ -24,6 +28,7 @@ module.exports = (grunt) ->
 		uglify:
 			dist:
 				files:
+					'dist/vtex-context.min.js': 'dist/vtex-context.js'
 					'dist/vtex-utils.min.js': 'dist/vtex-utils.js'
 
 		karma:
@@ -55,4 +60,7 @@ module.exports = (grunt) ->
 
 	grunt.loadNpmTasks name for name of pkg.dependencies when name[0..5] is 'grunt-'
 
-	grunt.registerTask 'test', ['clean:main', 'copy', 'coffee', 'uglify', 'karma:single']
+
+	grunt.registerTask 'test', ['clean:main', 'copy:main', 'coffee', 'karma:single']
+	grunt.registerTask 'dist', ['test', 'clean:dist', 'copy:dist', 'uglify']
+	grunt.registerTask 'default', ['dist']
