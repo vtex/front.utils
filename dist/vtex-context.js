@@ -15,6 +15,12 @@
 
     Context.prototype.searchCookies = function(whitelist, rules) {
       var cookieKey, cookieString, cookieValue, cookies, cookiesArray, optionName, optionValue, rule, _i, _j, _k, _len, _len1, _len2;
+      if (whitelist == null) {
+        whitelist = [];
+      }
+      if (rules == null) {
+        rules = [];
+      }
       cookies = {};
       cookiesArray = document.cookie.split(";");
       for (_i = 0, _len = whitelist.length; _i < _len; _i++) {
@@ -40,6 +46,12 @@
 
     Context.prototype.searchQueryString = function(whitelist, rules) {
       var qs, qsArray;
+      if (whitelist == null) {
+        whitelist = [];
+      }
+      if (rules == null) {
+        rules = [];
+      }
       qsArray = _.urlParams();
       qs = this.searchThrough(whitelist, rules, qsArray) != null;
       return qs;
@@ -47,6 +59,12 @@
 
     Context.prototype.searchLocalStorage = function(whitelist, rules) {
       var ls, lsArray;
+      if (whitelist == null) {
+        whitelist = [];
+      }
+      if (rules == null) {
+        rules = [];
+      }
       lsArray = localStorage;
       ls = this.searchThrough(whitelist, rules, lsArray) != null;
       return ls;
