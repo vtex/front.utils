@@ -293,13 +293,13 @@ class Utils
 	# PRIVATE
 	#
 	_getCurrency: =>
-		window.vtex?.i18n?.getCurrency() or 'R$ '
+		window.vtex?.i18n?.getCurrency?() or 'R$ '
 
 	_getDecimalSeparator: =>
-		window.vtex?.i18n?.getDecimalSeparator() or ','
+		window.vtex?.i18n?.getDecimalSeparator?() or ','
 
 	_getThousandsSeparator: =>
-		window.vtex?.i18n?.getThousandsSeparator() or '.'
+		window.vtex?.i18n?.getThousandsSeparator?() or '.'
 
 	_extend: (obj, sources...) =>
 		for source in sources when source
