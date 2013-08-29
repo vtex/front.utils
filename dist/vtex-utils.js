@@ -409,17 +409,17 @@
 
     Utils.prototype._getCurrency = function() {
       var _ref, _ref1;
-      return ((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? _ref1.getCurrency() : void 0 : void 0) || 'R$ ';
+      return ((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? typeof _ref1.getCurrency === "function" ? _ref1.getCurrency() : void 0 : void 0 : void 0) || 'R$ ';
     };
 
     Utils.prototype._getDecimalSeparator = function() {
       var _ref, _ref1;
-      return ((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? _ref1.getDecimalSeparator() : void 0 : void 0) || ',';
+      return ((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? typeof _ref1.getDecimalSeparator === "function" ? _ref1.getDecimalSeparator() : void 0 : void 0 : void 0) || ',';
     };
 
     Utils.prototype._getThousandsSeparator = function() {
       var _ref, _ref1;
-      return ((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? _ref1.getThousandsSeparator() : void 0 : void 0) || '.';
+      return ((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? typeof _ref1.getThousandsSeparator === "function" ? _ref1.getThousandsSeparator() : void 0 : void 0 : void 0) || '.';
     };
 
     Utils.prototype._extend = function() {
