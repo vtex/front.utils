@@ -289,6 +289,61 @@ class Utils
 			obj2[k] = f k, v
 		obj2
 
+	###
+	Produces a new flattened object
+
+	@param [Object] obj the object
+	@param [Object] target (optional) object
+	@param [String] prefix (optional)
+	@return [Object] flattened object
+
+	@example
+		obj = {attr: {address: {street: 'Wall'}}};
+		flattenObj(obj)
+		#=> { 'attr.address.street': 'Wall' }
+	###
+	flattenObj: (obj, target, prefix) =>
+		unless root._.reduce then throw "This function requires Underscore"
+
+		prefix = prefix || ''
+
+		return _.reduce(obj, (result, value, key) =>
+			if _.isObject(value)
+				@flattenObj(value, result, prefix + key + '.')
+			else
+				result[prefix + key] = value
+
+			return result;
+		, target || {})
+
+	###
+	Produces a new un-flattened object
+
+	@param [Object] obj the object
+
+	@example
+		obj = { 'attr.address.street': 'Wall' }
+		unFlattenObj(obj)
+		#=> {attr: {address: {street: 'Wall'}}};
+	###
+	unFlattenObj: (obj) =>
+		unless root._.reduce then throw "This function requires Underscore"
+
+		return _.reduce(obj, (result, value, keys) =>
+			current = result
+			partitions = keys.split('.')
+			limit = partitions.length - 1
+
+			_.each(partitions, (key, index) =>
+				if index == limit
+					current = current[key] = value
+				else
+					current = current[key] = current[key] || {}
+			)
+
+			return result
+		, {})
+
 	#
 	# PRIVATE
 	#

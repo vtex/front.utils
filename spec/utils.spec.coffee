@@ -152,3 +152,29 @@ describe 'utils', ->
 
 	describe 'mapObj', ->
 		it '', ->
+
+	describe 'flattenObj', ->
+		it 'should flatten an object', ->
+			# Arrange
+			obj =
+				person:
+					job:
+						name: "Singer"
+
+			# Act
+			result = _.flattenObj(obj)
+
+			# Assert
+			expect(result["person.job.name"]).toEqual("Singer")
+
+	describe 'unFlattenObj', ->
+		it 'should unflatten an object', ->
+			# Arrange
+			obj =
+				"person.job.name": "Singer"
+
+			# Act
+			result = _.unFlattenObj(obj)
+
+			# Assert
+			expect(result.person.job.name).toEqual("Singer")
