@@ -10,5 +10,8 @@
     "test",
     "tests",
     "spec"
-  ]
+  ],
+  "devDependencies": {
+    "underscore": "1.5.x"
+  }
 }

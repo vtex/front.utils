@@ -120,15 +120,14 @@ describe 'utils', ->
 	describe 'capitalizeSentence', ->
 		it 'should call capitalizeWord for every word', ->
 			# Arrange
-			sentence =  'The quick brown fox jumps over the lazy dog'
-			times = sentence.split(' ').length
-			spyOn(_, 'capitalizeWord')
+			sentence = 'The quick brown fox jumps over the lazy dog'
+			sentenceExp = 'The Quick Brown Fox Jumps Over The Lazy Dog'
 
 			# Act
-			_.capitalizeSentence(sentence)
+			result = _.capitalizeSentence(sentence)
 
 			# Assert
-			expect(_.capitalizeWord.callCount).toEqual(times)
+			expect(result).toEqual(sentenceExp)
 
 	describe 'maskInfo', ->
 		it 'should substitute * for some html', ->
