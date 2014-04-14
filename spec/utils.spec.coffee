@@ -182,3 +182,38 @@ describe 'utils', ->
 			# Assert
 			expect(test).toThrow()
 			#expect(result.person.job.name).toEqual("Singer")
+
+	describe 'padStr', ->
+		it 'should pad left', ->
+			# Arrange
+			number = 1
+			limit = 2
+			padding = '00'
+
+			# Act
+			result = _.padStr(number, limit, padding)
+
+			# Assert
+			expect(result).toEqual('01')
+
+	describe 'dateFormat', ->
+		it 'should format', ->
+			# Arrange
+			date = '2014/01/23'
+
+			# Act
+			result = _.dateFormat(date)
+
+			# Assert
+			expect(result).toEqual('23/01/2014')
+
+	describe 'dateFormatUS', ->
+		it 'should format as american date', ->
+			# Arrange
+			date = '2014/01/23'
+
+			# Act
+			result = _.dateFormatUS(date)
+
+			# Assert
+			expect(result).toEqual('1/23/2014')

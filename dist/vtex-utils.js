@@ -473,6 +473,59 @@
       }, {});
     };
 
+    /*
+    	Padding left
+    
+    	@param [String] string to insert padding
+    	@param [Number] limit
+    	@param [String] padding characters
+    
+    	@example
+    		padStr('1', 2, '00')
+    		#=> '01';
+    */
+
+
+    Utils.prototype.padStr = function(str, limit, padding) {
+      return (padding + str).split('').reverse().slice(0, limit).reverse().join('');
+    };
+
+    /*
+    	Format date as DD/MM/YYYY
+    
+    	@param [Date|String] date
+    
+    	@example
+    		dateFormat('2014/01/23')
+    		#=> 23/01/2014;
+    */
+
+
+    Utils.prototype.dateFormat = function(date) {
+      if (typeof date === 'string') {
+        date = new Date(date);
+      }
+      return "" + (this.padStr(date.getDate(), 2, '00')) + "/" + (this.padStr(date.getMonth() + 1, 2, '00')) + "/" + (date.getFullYear());
+    };
+
+    /*
+    	Format date as M/DD/YYYY
+    
+    	@param [Date|String] date
+    
+    	@example
+    		dateFormatUS('2014/01/23')
+    		#=> 1/23/2014;
+    */
+
+
+    Utils.prototype.dateFormatUS = function(date) {
+      if (typeof date === 'string') {
+        date = new Date(date);
+      }
+      return "" + (date.getMonth() + 1) + "/" + (this.padStr(date.getDate(), 2, '00')) + "/" + (date.getFullYear());
+    };
+
     Utils.prototype._getCurrency = function() {
       var _ref, _ref1;
       return ((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? typeof _ref1.getCurrency === "function" ? _ref1.getCurrency() : void 0 : void 0 : void 0) || 'R$ ';

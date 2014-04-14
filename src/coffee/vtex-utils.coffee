@@ -344,6 +344,48 @@ class Utils
 			return result
 		, {})
 
+	###
+	Padding left
+
+	@param [String] string to insert padding
+	@param [Number] limit
+	@param [String] padding characters
+
+	@example
+		padStr('1', 2, '00')
+		#=> '01';
+	###
+	padStr: (str, limit, padding) ->
+		(padding + str).split('').reverse().slice(0, limit).reverse().join('')
+
+	###
+	Format date as DD/MM/YYYY
+
+	@param [Date|String] date
+
+	@example
+		dateFormat('2014/01/23')
+		#=> 23/01/2014;
+	###
+	dateFormat: (date) ->
+		if typeof date == 'string'
+			date = new Date(date)
+		return "#{@padStr(date.getDate(), 2, '00')}/#{@padStr(date.getMonth()+1, 2, '00')}/#{date.getFullYear()}"
+
+	###
+	Format date as M/DD/YYYY
+
+	@param [Date|String] date
+
+	@example
+		dateFormatUS('2014/01/23')
+		#=> 1/23/2014;
+	###
+	dateFormatUS: (date) ->
+		if typeof date == 'string'
+			date = new Date(date)
+		return "#{date.getMonth()+1}/#{@padStr(date.getDate(), 2, '00')}/#{date.getFullYear()}"
+
 	#
 	# PRIVATE
 	#
