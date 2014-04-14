@@ -162,12 +162,10 @@ describe 'utils', ->
 						name: "Singer"
 
 			# Act
-			test = ->
-				result = _.flattenObj(obj)
+			result = _.flattenObj(obj)
 
 			# Assert
-			expect(test).toThrow()
-			#expect(result["person.job.name"]).toEqual("Singer")
+			expect(result["person.job.name"]).toEqual("Singer")
 
 	describe 'unFlattenObj', ->
 		it 'should unflatten an object', ->
@@ -176,12 +174,10 @@ describe 'utils', ->
 				"person.job.name": "Singer"
 
 			# Act
-			test = ->
-				result = _.unFlattenObj(obj)
+			result = _.unFlattenObj(obj)
 
-			# Assert
-			expect(test).toThrow()
-			#expect(result.person.job.name).toEqual("Singer")
+			# Assert			
+			expect(result.person.job.name).toEqual("Singer")
 
 	describe 'padStr', ->
 		it 'should pad left', ->
@@ -217,3 +213,4 @@ describe 'utils', ->
 
 			# Assert
 			expect(result).toEqual('1/23/2014')
+
