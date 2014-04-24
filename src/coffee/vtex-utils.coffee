@@ -236,6 +236,7 @@ class Utils
 		.toLowerCase()
 		.replace(/\,/g, 'V')
 		.replace(/\./g, 'P')
+    .replace(/\:/g, 'D')
 		return s.charAt(0).toUpperCase() + s.slice(1)
 
 	###
