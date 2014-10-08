@@ -343,7 +343,7 @@
 
     Utils.prototype.sanitize = function(str) {
       var s;
-      s = this.plainChars(str.replace(/\s/g, '').replace(/\/|\\/g, '-').replace(/\(|\)|\'|\"/g, '').toLowerCase().replace(/\,/g, 'V').replace(/\./g, 'P'));
+      s = this.plainChars(str.replace(/\s/g, '').replace(/\/|\\/g, '-').replace(/\(|\)|\'|\"/g, '').toLowerCase().replace(/\,/g, 'V').replace(/\./g, 'P').replace(/\:/g, 'D'));
       return s.charAt(0).toUpperCase() + s.slice(1);
     };
 
@@ -547,8 +547,12 @@
     };
 
     Utils.prototype._getDecimalDigits = function() {
-      var _ref, _ref1;
-      return ((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? typeof _ref1.getDecimalDigits === "function" ? _ref1.getDecimalDigits() : void 0 : void 0 : void 0) || 2;
+      var _ref, _ref1, _ref2, _ref3;
+      if (((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? _ref1.getDecimalDigits : void 0 : void 0) != null) {
+        return (_ref2 = window.vtex) != null ? (_ref3 = _ref2.i18n) != null ? _ref3.getDecimalDigits() : void 0 : void 0;
+      } else {
+        return 2;
+      }
     };
 
     Utils.prototype._extend = function() {
