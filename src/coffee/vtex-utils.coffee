@@ -403,7 +403,7 @@ class Utils
 		window.vtex?.i18n?.getThousandsSeparator?() or '.'
 
 	_getDecimalDigits: =>
-		window.vtex?.i18n?.getDecimalDigits?() or 2
+		if window.vtex?.i18n?.getDecimalDigits? then window.vtex?.i18n?.getDecimalDigits() else 2
 
 	_extend: (obj, sources...) =>
 		for source in sources when source
