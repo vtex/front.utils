@@ -25,7 +25,7 @@ class Utils
 			decimalSeparator: @_getDecimalSeparator()
 			thousandsSeparator: @_getThousandsSeparator()
 			absolute: false
-			decimalPlaces: 2
+			decimalPlaces: @_getDecimalDigits()
 		opts = @_extend(defaults, options)
 
 		value = -value if opts.absolute and value < 0
@@ -34,7 +34,10 @@ class Utils
 		[wholePart, decimalPart] = value.split('.')
 		wholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, opts.thousandsSeparator)
 
-		wholePart + opts.decimalSeparator + decimalPart
+		if opts.decimalPlaces > 0
+			return wholePart + opts.decimalSeparator + decimalPart
+		else
+			return wholePart
 
 
 	intAsCurrency: (value, options) =>
@@ -398,6 +401,9 @@ class Utils
 
 	_getThousandsSeparator: =>
 		window.vtex?.i18n?.getThousandsSeparator?() or '.'
+
+	_getDecimalDigits: =>
+		window.vtex?.i18n?.getDecimalDigits?() or 2
 
 	_extend: (obj, sources...) =>
 		for source in sources when source

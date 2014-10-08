@@ -37,6 +37,13 @@ describe 'utils', ->
 			# Assert
 			expect(_._getThousandsSeparator()).toEqual('.')
 
+	describe '_getDecimalDigits', ->
+		it 'should default to 2 when vtex.i18n is undefined', ->
+			# Arrange
+			window.vtex = undefined
+
+			# Assert
+			expect(_._getDecimalDigits()).toEqual(2)
 
 	describe 'pad', ->
 		it 'should not modify strings larger than max', ->

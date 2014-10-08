@@ -7,6 +7,7 @@
   Utils = (function() {
     function Utils() {
       this._extend = __bind(this._extend, this);
+      this._getDecimalDigits = __bind(this._getDecimalDigits, this);
       this._getThousandsSeparator = __bind(this._getThousandsSeparator, this);
       this._getDecimalSeparator = __bind(this._getDecimalSeparator, this);
       this._getCurrency = __bind(this._getCurrency, this);
@@ -58,7 +59,7 @@
         decimalSeparator: this._getDecimalSeparator(),
         thousandsSeparator: this._getThousandsSeparator(),
         absolute: false,
-        decimalPlaces: 2
+        decimalPlaces: this._getDecimalDigits()
       };
       opts = this._extend(defaults, options);
       if (opts.absolute && value < 0) {
@@ -67,7 +68,11 @@
       value = value.toFixed(opts.decimalPlaces);
       _ref = value.split('.'), wholePart = _ref[0], decimalPart = _ref[1];
       wholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, opts.thousandsSeparator);
-      return wholePart + opts.decimalSeparator + decimalPart;
+      if (opts.decimalPlaces > 0) {
+        return wholePart + opts.decimalSeparator + decimalPart;
+      } else {
+        return wholePart;
+      }
     };
 
     Utils.prototype.intAsCurrency = function(value, options) {
@@ -539,6 +544,11 @@
     Utils.prototype._getThousandsSeparator = function() {
       var _ref, _ref1;
       return ((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? typeof _ref1.getThousandsSeparator === "function" ? _ref1.getThousandsSeparator() : void 0 : void 0 : void 0) || '.';
+    };
+
+    Utils.prototype._getDecimalDigits = function() {
+      var _ref, _ref1;
+      return ((_ref = window.vtex) != null ? (_ref1 = _ref.i18n) != null ? typeof _ref1.getDecimalDigits === "function" ? _ref1.getDecimalDigits() : void 0 : void 0 : void 0) || 2;
     };
 
     Utils.prototype._extend = function() {
