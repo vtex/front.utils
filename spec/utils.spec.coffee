@@ -137,21 +137,114 @@ describe 'utils', ->
       expect(result).toEqual(sentenceExp)
 
   describe 'maskString', ->
-    it 'should receive a raw value, a mask and return a masked value', ->
+    it 'should receive a raw Brazilian postal code value, a mask and return a masked value', ->
       # Arrange
       raw = '22030030'
       mask = '99999-999'
       masked = '22030-030'
+
       # Assert
       expect(_.maskString(raw,mask)).toEqual(masked)
 
-    it 'should receive a large raw value, a mask and return a masked value', ->
+    it 'should receive a raw Brazilian document value, a mask and return a masked value', ->
       # Arrange
       raw = '12345678909'
       mask = '999.999.999-99'
       masked = '123.456.789-09'
+
       # Assert
       expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should receive a masked value, a mask and return the same masked value', ->
+      # Arrange
+      raw = '123.456.789-09'
+      mask = '999.999.999-99'
+      masked = '123.456.789-09'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should receive a raw value, a mask smaller than the raw value, and return a trimmed masked value', ->
+      # Arrange
+      raw = '12345678909'
+      mask = '999.999.999'
+      masked = '123.456.789'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should receive a raw value smaller than the mask, a mask, and return a masked value', ->
+      # Arrange
+      raw = '123456789'
+      mask = '999.999.999-99'
+      masked = '123.456.789'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should receive a numeric raw value not matching mask and return raw value', ->
+      # Arrange
+      raw = '12345'
+      mask = 'AAA-AA'
+      masked = '12345'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should receive a all-letters raw value not matching mask and return raw value', ->
+      # Arrange
+      raw = 'ABCDE'
+      mask = '999-99'
+      masked = 'ABCDE'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should receive a mixed raw value not matching mask and return raw value', ->
+      # Arrange
+      raw = '1232ABB'
+      mask = '999-AA-99'
+      masked = '1232ABB'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should receive a mixed raw value, a matching mask and return masked value', ->
+      # Arrange
+      raw = '123rj28'
+      mask = '999-AA-99'
+      masked = '123-rj-28'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should receive a mixed raw value with punctuation, a matching mask and return masked value', ->
+      # Arrange
+      raw = '123äéöã28'
+      mask = '999-AAAA-99'
+      masked = '123-äéöã-28'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should ignore mask characters outside of 9 or A', ->
+      # Arrange
+      raw = 'bana99'
+      mask = '123-ABC'
+      masked = 'ban-a99'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should respect user fixedChar parameter', ->
+      # Arrange
+      raw = 'banana'
+      fixedChars = 'X'
+      mask = 'AAAXAAA'
+      masked = 'banXana'
+
+      # Assert
+      expect(_.maskString(raw,mask,fixedChars)).toEqual(masked)
 
   describe 'maskInfo', ->
     it 'should substitute * for some html', ->

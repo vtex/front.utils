@@ -33,23 +33,23 @@
     }
 
     /*
-    	Formats monetary value as a string with decimal and thousands separators
+    Formats monetary value as a string with decimal and thousands separators
     
-    	@param [Number] value the value to format
-    	@param [Object] options
-    	@option options [String] decimalSeparator the character used to separate the decimal and integer parts. Default: ','
-    	@option options [String] thousandsSeparator the character used to separate the thousands. Default: '.'
-    	@option options [Boolean] absolute whether to use an absolute value or not. Default: false
-    	@option options [Integer] decimalPlaces the number of decimal places to use. Default: 2
-    	@return [String] the value formatted according to the options given
+    @param [Number] value the value to format
+    @param [Object] options
+    @option options [String] decimalSeparator the character used to separate the decimal and integer parts. Default: ','
+    @option options [String] thousandsSeparator the character used to separate the thousands. Default: '.'
+    @option options [Boolean] absolute whether to use an absolute value or not. Default: false
+    @option options [Integer] decimalPlaces the number of decimal places to use. Default: 2
+    @return [String] the value formatted according to the options given
     
-    	@example Default usage
-    		formatCurrency(1050)
-    		#=> '1.050,00'
+    @example Default usage
+      formatCurrency(1050)
+      #=> '1.050,00'
     
-    	@example Usage with options
-    		formatCurrency(-1050.99, {'decimalSeparator': '.', 'thousandsSeparator': ',', 'absolute': true, 'decimalPlaces': 3}
-    		#=> '1,050.990'
+    @example Usage with options
+      formatCurrency(-1050.99, {'decimalSeparator': '.', 'thousandsSeparator': ',', 'absolute': true, 'decimalPlaces': 3}
+      #=> '1,050.990'
     */
 
 
@@ -80,22 +80,22 @@
     };
 
     /*
-    	Pads a string until it reaches a certain length. Non-strings will be converted.
+    Pads a string until it reaches a certain length. Non-strings will be converted.
     
-    	@param [String] str the string to be padded. Any other type will be converted to string
-    	@param [Integer] max the length desired
-    	@param [Object] options
-    	@option options [String] char the character used to pad the string. Default: '0'
-    	@option options [String] position where to pad. Valid: 'left', 'right'. Default: 'left'
-    	@return [String] the string padded according to the options given
+    @param [String] str the string to be padded. Any other type will be converted to string
+    @param [Integer] max the length desired
+    @param [Object] options
+    @option options [String] char the character used to pad the string. Default: '0'
+    @option options [String] position where to pad. Valid: 'left', 'right'. Default: 'left'
+    @return [String] the string padded according to the options given
     
-    	@example Default usage
-    		pad('19,99', 6)
-    		#=> '019,99'
+    @example Default usage
+      pad('19,99', 6)
+      #=> '019,99'
     
-    	@example Usage with options
-    		pad('Hello', 7, {'char': ' ', 'position': 'right'})
-    		#=> 'Hello  '
+    @example Usage with options
+      pad('Hello', 7, {'char': ' ', 'position': 'right'})
+      #=> 'Hello  '
     */
 
 
@@ -117,17 +117,17 @@
     };
 
     /*
-    	Returns the content of the cooke with the given name
+    Returns the content of the cooke with the given name
     
-    	@param [String] name the name of the cookie to be read
-    	@return [String] the content of the cookie with the given name
+    @param [String] name the name of the cookie to be read
+    @return [String] the content of the cookie with the given name
     
-    	@example Default usage
-    		# Assuming document.cookie is 'a=123; b=xyz'
-    		readCookie(a)
-    		#=> '123'
-    		readCookie(b)
-    		#=> 'xyz'
+    @example Default usage
+      # Assuming document.cookie is 'a=123; b=xyz'
+      readCookie(a)
+      #=> '123'
+      readCookie(b)
+      #=> 'xyz'
     */
 
 
@@ -145,20 +145,20 @@
     };
 
     /*
-    	Receives a cookie that has "subcookies" in the format a=b&c=d
-    	Returns the content of the "subcookie" with the given name
+    Receives a cookie that has "subcookies" in the format a=b&c=d
+    Returns the content of the "subcookie" with the given name
     
-    	@param [String] cookie a string with "subcookies" in the format 'a=b&c=d'
-    	@param [String] name the name of the "subcookie" to get the value of
-    	@return [String] the content of the "subcookie" with the given name
+    @param [String] cookie a string with "subcookies" in the format 'a=b&c=d'
+    @param [String] name the name of the "subcookie" to get the value of
+    @return [String] the content of the "subcookie" with the given name
     
-    	@example Get subcookies
-    		c = readCookie('sub')
-    		#=> 'a=b&c=d'
-    		getCookieValue(c, 'a')
-    		#=> 'b'
-    		getCookieValue(c, 'c')
-    		#=> 'd'
+    @example Get subcookies
+      c = readCookie('sub')
+      #=> 'a=b&c=d'
+      getCookieValue(c, 'a')
+      #=> 'b'
+      getCookieValue(c, 'c')
+      #=> 'd'
     */
 
 
@@ -176,15 +176,15 @@
     };
 
     /*
-    	Parses the querystring and returns its object representation.
-    	It decodes URI components (such as %3D to =) and replaces + with space.
+    Parses the querystring and returns its object representation.
+    It decodes URI components (such as %3D to =) and replaces + with space.
     
-    	@return [Object] an object representation of the querystring parameters
+    @return [Object] an object representation of the querystring parameters
     
-    	@example
-    		# URL is http://google.com/?a=b&c=hello+%3D+hi
-    		urlParam()
-    		#=> {'a': 'b', 'c': 'hello = hi'}
+    @example
+      # URL is http://google.com/?a=b&c=hello+%3D+hi
+      urlParam()
+      #=> {'a': 'b', 'c': 'hello = hi'}
     */
 
 
@@ -204,14 +204,14 @@
     };
 
     /*
-    	Transforms a ISO8061 compliant date string into a Date object
+    Transforms a ISO8061 compliant date string into a Date object
     
-    	@param [String] isostr a string in the format YYYY-MM-DDThh:mm:ss
-    	@return [Date] a Date object created from the date information in the string
+    @param [String] isostr a string in the format YYYY-MM-DDThh:mm:ss
+    @return [Date] a Date object created from the date information in the string
     
-    	@example Default usage
-    		dateFromISO8601('1997-07-16T19:20:30')
-    		#=> Date object ("Thu Jul 18 2013 15:08:08 GMT-0300 (BRT)")
+    @example Default usage
+      dateFromISO8601('1997-07-16T19:20:30')
+      #=> Date object ("Thu Jul 18 2013 15:08:08 GMT-0300 (BRT)")
     */
 
 
@@ -223,18 +223,18 @@
     };
 
     /*
-    	Capitalizes the first character of a given string.
+    Capitalizes the first character of a given string.
     
-    	@param [String] word the word to be capitalized
-    	@return [String] the capitalized word
+    @param [String] word the word to be capitalized
+    @return [String] the capitalized word
     
-    	@example Default usage
-    		capitalizeWord('hello')
-    		#=> 'Hello'
+    @example Default usage
+      capitalizeWord('hello')
+      #=> 'Hello'
     
-    	@example It only capitalizes the first character
-    		capitalizeWord(' hi ')
-    		#=> ' hi '
+    @example It only capitalizes the first character
+      capitalizeWord(' hi ')
+      #=> ' hi '
     */
 
 
@@ -246,7 +246,7 @@
     };
 
     /*
-    	@see {Utils#capitalizeWord}.
+    @see {Utils#capitalizeWord}.
     */
 
 
@@ -258,14 +258,14 @@
     };
 
     /*
-    	Capitalizes each word in a given sentende.
+    Capitalizes each word in a given sentende.
     
-    	@param [String] sentence the sentence to be capitalized
-    	@return [String] the capitalized sentence
+    @param [String] sentence the sentence to be capitalized
+    @return [String] the capitalized sentence
     
-    	@example Default usage
-    		capitalizeSentence('* hello world!')
-    		#=> '* Hello Wordl!'
+    @example Default usage
+      capitalizeSentence('* hello world!')
+      #=> '* Hello Wordl!'
     */
 
 
@@ -287,32 +287,47 @@
       return newWords.join(' ');
     };
 
-    Utils.prototype.maskString = function(str, mask) {
-      var applyMask, argString, fixedCharsReg, maskStr;
-      maskStr = mask.mask || mask;
-      applyMask = function(valueArray, maskArray, fixedCharsReg) {
-        var i, _i, _ref;
-        for (i = _i = 0, _ref = valueArray.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
-          if (maskArray[i] && fixedCharsReg.test(maskArray[i]) && maskArray[i] !== valueArray[i]) {
-            valueArray.splice(i, 0, maskArray[i]);
+    Utils.prototype.maskString = function(str, mask, fixedChars) {
+      var applyMask, argString, digitMask, fixedCharsRegex, letterMask, maskString;
+      if (fixedChars == null) {
+        fixedChars = '[(),.:/ -]';
+      }
+      argString = typeof str === "string" ? str : String(str);
+      maskString = (mask != null ? mask.mask : void 0) || mask;
+      fixedCharsRegex = new RegExp(fixedChars);
+      digitMask = '9';
+      letterMask = 'A';
+      applyMask = function(valueArray, maskArray, fixed) {
+        var i, maskedValueArray, noMatchDigit, noMatchLetter, v, _i, _len;
+        maskedValueArray = valueArray.slice(0);
+        for (i = _i = 0, _len = maskArray.length; _i < _len; i = ++_i) {
+          v = maskArray[i];
+          if (!(maskedValueArray[i] && maskArray[i])) {
+            break;
+          }
+          noMatchDigit = maskArray[i] === digitMask && !/\d/.test(maskedValueArray[i]);
+          noMatchLetter = maskArray[i].toUpperCase() === letterMask && !/[a-zA-Z\u00C0-\u017F]/.test(maskedValueArray[i]);
+          if (noMatchDigit || noMatchLetter) {
+            return valueArray;
+          }
+          if (fixed.test(maskArray[i])) {
+            maskedValueArray.splice(i, 0, maskArray[i]);
           }
         }
-        return valueArray;
+        return maskedValueArray;
       };
-      argString = typeof str === "string" ? str : String(str);
-      fixedCharsReg = new RegExp('[(),.:/ -]');
-      return applyMask(argString.split(""), maskStr.split(""), fixedCharsReg).join("").substring(0, maskStr.split("").length);
+      return applyMask(argString.split(""), maskString.split(""), fixedCharsRegex).join("").substring(0, maskString.length);
     };
 
     /*
-    	Substitutes each * in a string with span.masked-info *
+    Substitutes each * in a string with span.masked-info *
     
-    	@param [String] info the string to mask
-    	@return [String] the masked string
+    @param [String] info the string to mask
+    @return [String] the masked string
     
-    	@example Default usage
-    		maskInfo('abc**')
-    		#=> 'abc<span class="masked-info">*</span><span class="masked-info">*</span>'
+    @example Default usage
+      maskInfo('abc**')
+      #=> 'abc<span class="masked-info">*</span><span class="masked-info">*</span>'
     */
 
 
@@ -348,14 +363,14 @@
     };
 
     /*
-    	Replaces all space charactes with hyphen characters
+    Replaces all space charactes with hyphen characters
     
-    	@param [String] str the string
-    	@return [Stirng] the string with all space characters replaced with hyphen characters
+    @param [String] str the string
+    @return [Stirng] the string with all space characters replaced with hyphen characters
     
-    	@example
-    		spacesToHyphens("Branco e Preto")
-    		#=> "Branco-e-Preto"
+    @example
+      spacesToHyphens("Branco e Preto")
+      #=> "Branco-e-Preto"
     */
 
 
@@ -364,14 +379,14 @@
     };
 
     /*
-    	Creates a (mostly) unique hashcode from a string
+    Creates a (mostly) unique hashcode from a string
     
-    	@param [String] str the string
-    	@return [Number] the created hashcode
+    @param [String] str the string
+    @return [Number] the created hashcode
     
-    	@example Typical usage is to give an object a unique ID
-    		uid = hash(Date.now())
-    		#=> -707575924
+    @example Typical usage is to give an object a unique ID
+      uid = hash(Date.now())
+      #=> -707575924
     */
 
 
@@ -388,18 +403,18 @@
     };
 
     /*
-    	Produces a new object mapping each key:value pair to a key:f(value) pair.
+    Produces a new object mapping each key:value pair to a key:f(value) pair.
     
-    	@param [Object] obj the object
-    	@param [Function] f a function that will receive (key, value) and should return a replacement value
-    	@return [Object] a new object with each value mapped according to the function
+    @param [Object] obj the object
+    @param [Function] f a function that will receive (key, value) and should return a replacement value
+    @return [Object] a new object with each value mapped according to the function
     
-    	@example
-    		obj = {a: 1, b: 2};
-    		mapObj(obj, function(key, value){
-    			return value*10
-    		});
-    		#=> {a: 10, b: 20}
+    @example
+      obj = {a: 1, b: 2};
+      mapObj(obj, function(key, value){
+        return value*10
+      });
+      #=> {a: 10, b: 20}
     */
 
 
@@ -415,17 +430,17 @@
     };
 
     /*
-    	Produces a new flattened object
+    Produces a new flattened object
     
-    	@param [Object] obj the object
-    	@param [Object] target (optional) object
-    	@param [String] prefix (optional)
-    	@return [Object] flattened object
+    @param [Object] obj the object
+    @param [Object] target (optional) object
+    @param [String] prefix (optional)
+    @return [Object] flattened object
     
-    	@example
-    		obj = {attr: {address: {street: 'Wall'}}};
-    		flattenObj(obj)
-    		#=> { 'attr.address.street': 'Wall' }
+    @example
+      obj = {attr: {address: {street: 'Wall'}}};
+      flattenObj(obj)
+      #=> { 'attr.address.street': 'Wall' }
     */
 
 
@@ -446,14 +461,14 @@
     };
 
     /*
-    	Produces a new un-flattened object
+    Produces a new un-flattened object
     
-    	@param [Object] obj the object
+    @param [Object] obj the object
     
-    	@example
-    		obj = { 'attr.address.street': 'Wall' }
-    		unFlattenObj(obj)
-    		#=> {attr: {address: {street: 'Wall'}}};
+    @example
+      obj = { 'attr.address.street': 'Wall' }
+      unFlattenObj(obj)
+      #=> {attr: {address: {street: 'Wall'}}};
     */
 
 
@@ -479,15 +494,15 @@
     };
 
     /*
-    	Padding left
+    Padding left
     
-    	@param [String] string to insert padding
-    	@param [Number] limit
-    	@param [String] padding characters
+    @param [String] string to insert padding
+    @param [Number] limit
+    @param [String] padding characters
     
-    	@example
-    		padStr('1', 2, '00')
-    		#=> '01';
+    @example
+      padStr('1', 2, '00')
+      #=> '01';
     */
 
 
@@ -496,13 +511,13 @@
     };
 
     /*
-    	Format date as DD/MM/YYYY
+    Format date as DD/MM/YYYY
     
-    	@param [Date|String] date
+    @param [Date|String] date
     
-    	@example
-    		dateFormat('2014/01/23')
-    		#=> 23/01/2014;
+    @example
+      dateFormat('2014/01/23')
+      #=> 23/01/2014;
     */
 
 
@@ -514,13 +529,13 @@
     };
 
     /*
-    	Format date as M/DD/YYYY
+    Format date as M/DD/YYYY
     
-    	@param [Date|String] date
+    @param [Date|String] date
     
-    	@example
-    		dateFormatUS('2014/01/23')
-    		#=> 1/23/2014;
+    @example
+      dateFormatUS('2014/01/23')
+      #=> 1/23/2014;
     */
 
 

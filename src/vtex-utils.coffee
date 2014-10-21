@@ -190,18 +190,33 @@ class Utils
     newWords = (@capitalizeWord(word) for word in oldWords)
     newWords.join(' ')
 
-  maskString: (str, mask) =>
-    # TODO clarificar
-    maskStr = mask.mask or mask
-    applyMask = (valueArray, maskArray, fixedCharsReg) ->
-      for i in [0...valueArray.length]
-        if maskArray[i] and fixedCharsReg.test(maskArray[i]) and maskArray[i] isnt valueArray[i]
-          valueArray.splice(i, 0, maskArray[i])
-      valueArray
-
+  maskString: (str, mask, fixedChars = '[(),.:/ -]') =>
     argString = if typeof str is "string" then str else String(str)
-    fixedCharsReg = new RegExp('[(),.:/ -]')
-    applyMask(argString.split(""), maskStr.split(""), fixedCharsReg).join("").substring(0, maskStr.split("").length)
+    maskString = mask?.mask or mask
+    fixedCharsRegex = new RegExp(fixedChars)
+    digitMask = '9'
+    letterMask = 'A'
+
+    applyMask = (valueArray, maskArray, fixed) ->
+      maskedValueArray = valueArray.slice(0) # clone values to preserve original in case of no match
+
+      for v, i in maskArray
+        # Stop if mask or value ended prematurely
+        if not (maskedValueArray[i] and maskArray[i])
+          break
+
+        noMatchDigit = maskArray[i] is digitMask and not /\d/.test(maskedValueArray[i])
+        noMatchLetter = maskArray[i].toUpperCase() is letterMask and not /[a-zA-Z\u00C0-\u017F]/.test(maskedValueArray[i])
+        # Return original if no-match found
+        if noMatchDigit or noMatchLetter
+          return valueArray
+
+        if fixed.test(maskArray[i])
+          maskedValueArray.splice i, 0, maskArray[i]
+
+      maskedValueArray
+
+    applyMask(argString.split(""), maskString.split(""), fixedCharsRegex).join("").substring(0, maskString.length)
 
   ###
   Substitutes each * in a string with span.masked-info *

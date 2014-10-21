@@ -16,7 +16,6 @@ module.exports = (grunt) ->
     uglify:
       dist:
         files:
-          'dist/vtex-context.min.js': 'dist/vtex-context.js'
           'dist/vtex-utils.min.js': 'dist/vtex-utils.js'
 
     karma:
