@@ -196,7 +196,6 @@ class Utils
     fixedCharsRegex = new RegExp(fixedChars)
     digitMask = '9'
     letterMask = 'A'
-
     applyMask = (valueArray, maskArray, fixed) ->
       maskedValueArray = valueArray.slice(0) # clone values to preserve original in case of no match
 
@@ -212,6 +211,8 @@ class Utils
           return valueArray
 
         if fixed.test(maskArray[i])
+          # Disconsider if this position is already mask
+          continue if maskArray[i] is maskedValueArray[i]
           maskedValueArray.splice i, 0, maskArray[i]
 
       maskedValueArray

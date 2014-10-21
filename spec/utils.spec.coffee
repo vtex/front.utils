@@ -182,6 +182,15 @@ describe 'utils', ->
       # Assert
       expect(_.maskString(raw,mask)).toEqual(masked)
 
+    it 'should receive a half-masked raw value, a mask, and return a masked value', ->
+      # Arrange
+      raw = '4444 33332'
+      mask = '9999 9999 9999 9999'
+      masked = '4444 3333 2'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
     it 'should receive a numeric raw value not matching mask and return raw value', ->
       # Arrange
       raw = '12345'
