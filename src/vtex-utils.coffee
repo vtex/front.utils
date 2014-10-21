@@ -216,7 +216,7 @@ class Utils
 
       maskedValueArray
 
-    applyMask(argString.split(""), maskString.split(""), fixedCharsRegex).join("").substring(0, maskString.length)
+    applyMask(argString.split(""), maskString.split(""), fixedCharsRegex).join("")
 
   ###
   Substitutes each * in a string with span.masked-info *

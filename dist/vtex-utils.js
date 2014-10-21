@@ -316,7 +316,7 @@
         }
         return maskedValueArray;
       };
-      return applyMask(argString.split(""), maskString.split(""), fixedCharsRegex).join("").substring(0, maskString.length);
+      return applyMask(argString.split(""), maskString.split(""), fixedCharsRegex).join("");
     };
 
     /*

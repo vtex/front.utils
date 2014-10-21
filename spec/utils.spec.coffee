@@ -164,11 +164,11 @@ describe 'utils', ->
       # Assert
       expect(_.maskString(raw,mask)).toEqual(masked)
 
-    it 'should receive a raw value, a mask smaller than the raw value, and return a trimmed masked value', ->
+    it 'should receive a raw value, a mask smaller than the raw value, and return the masked value preserving the remaining value', ->
       # Arrange
-      raw = '12345678909'
-      mask = '999.999.999'
-      masked = '123.456.789'
+      raw = '1234567890912'
+      mask = '999.999.999-99'
+      masked = '123.456.789-0912'
 
       # Assert
       expect(_.maskString(raw,mask)).toEqual(masked)
@@ -187,6 +187,15 @@ describe 'utils', ->
       raw = '12345'
       mask = 'AAA-AA'
       masked = '12345'
+
+      # Assert
+      expect(_.maskString(raw,mask)).toEqual(masked)
+
+    it 'should receive a all-letters raw value, a mask and return masked value', ->
+      # Arrange
+      raw = 'ABCDE'
+      mask = 'AAA-AA'
+      masked = 'ABC-DE'
 
       # Assert
       expect(_.maskString(raw,mask)).toEqual(masked)
