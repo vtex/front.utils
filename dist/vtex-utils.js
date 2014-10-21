@@ -311,6 +311,9 @@
             return valueArray;
           }
           if (fixed.test(maskArray[i])) {
+            if (maskArray[i] === maskedValueArray[i]) {
+              continue;
+            }
             maskedValueArray.splice(i, 0, maskArray[i]);
           }
         }
