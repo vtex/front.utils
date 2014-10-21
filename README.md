@@ -1,16 +1,18 @@
-# VTEX Frontend Utils
+# VTEX Front End Utils
 
-## Documentation
+A extension to Underscore with utility functions shared accross projects.
 
-For documentation, please clone and open doc/index.html
+## Developing
 
+    npm i
+    bower i
+    grunt karma:unit
 
 ## Workflow
 
 Before doing git stuff, please:
 
- - sudo grunt test
- - sudo grunt dist
+    grunt dist
 
 ------
 
