@@ -23,8 +23,12 @@ module.exports = (grunt) ->
         src: ['src/**/*.coffee']
 
     karma:
-      unit:
+      options:
         configFile: 'karma.conf.coffee'
+      ci:
+        singleRun: true
+      dev:
+        singleRun: false
 
     uglify:
       underscore:
@@ -37,7 +41,8 @@ module.exports = (grunt) ->
     min: ['uglify'] # minifies files
     # Deploy tasks
     dist: ['build', 'min', 'copy:deploy'] # Dist - minifies files
-    test: ['karma']
+    test: ['karma:ci']
+    devtest: ['karma:dev']
     vtex_deploy: ['shell:cp', 'shell:cp_br']
     # Development tasks
     default: ['build', 'connect', 'watch']
