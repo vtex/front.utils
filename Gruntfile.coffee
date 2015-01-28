@@ -1,33 +1,50 @@
+GruntVTEX = require 'grunt-vtex'
+
 module.exports = (grunt) ->
-  pkg = grunt.file.readJSON('package.json')
+  pkg = grunt.file.readJSON 'package.json'
 
-  grunt.initConfig
-    clean:
-      main: ['dist']
+  defaultConfig = GruntVTEX.generateConfig grunt, pkg
 
+  # Add custom configuration here as needed
+  customConfig =
     coffee:
       main:
-        expand: true
-        cwd: 'src/'
-        src: ['**/*.coffee']
-        dest: 'dist/<%= relativePath %>/'
-        ext: '.js'
+        files: [
+          expand: true
+          cwd: 'src/'
+          src: ['**/*.coffee']
+          dest: "build/<%= relativePath %>/"
+          rename: (path, filename) ->
+            path + filename.replace("coffee", "js")
+        ]
 
-    uglify:
-      dist:
-        files:
-          'dist/vtex-utils.min.js': 'dist/vtex-utils.js'
+    coffeelint:
+      main:
+        src: ['src/**/*.coffee']
 
     karma:
-      options:
-        configFile: 'karma.conf.coffee'
       unit:
-        autoWatch: true
-      single:
-        singleRun: true
+        configFile: 'karma.conf.coffee'
 
-  grunt.loadNpmTasks name for name of pkg.dependencies when name[0..5] is 'grunt-'
+    uglify:
+      underscore:
+        files:
+          'build/<%= relativePath %>/underscore/underscore-extensions.min.js': 'build/<%= relativePath %>/underscore/underscore-extensions.js'
 
-  grunt.registerTask 'test',    ['karma:single']
-  grunt.registerTask 'dist',    ['test', 'coffee:main', 'uglify']
-  grunt.registerTask 'default', ['dist']
+  tasks =
+    # Building block tasks
+    build: ['clean', 'coffee']
+    min: ['uglify'] # minifies files
+    # Deploy tasks
+    dist: ['build', 'min', 'copy:deploy'] # Dist - minifies files
+    test: ['karma']
+    vtex_deploy: ['shell:cp', 'shell:cp_br']
+    # Development tasks
+    default: ['build', 'connect', 'watch']
+    devmin: ['build', 'min', 'connect:http:keepalive'] # Minifies files and serve
+
+  # Project configuration.
+  grunt.config.init defaultConfig
+  grunt.config.merge customConfig
+  grunt.loadNpmTasks name for name of pkg.devDependencies when name[0..5] is 'grunt-' and name isnt 'grunt-vtex'
+  grunt.registerTask taskName, taskArray for taskName, taskArray of tasks

@@ -1,6 +1,4 @@
 class Utils
-
-
   ###
   Formats monetary value as a string with decimal and thousands separators
 
@@ -173,7 +171,7 @@ class Utils
   @see {Utils#capitalizeWord}.
   ###
   capitalize: (word = '') =>
-    capitalizeWord(word)
+    @capitalizeWord(word)
 
   ###
   Capitalizes each word in a given sentende.
@@ -323,7 +321,7 @@ class Utils
     #=> { 'attr.address.street': 'Wall' }
   ###
   flattenObj: (obj, target, prefix) =>
-    unless root._.reduce then throw "This function requires Underscore"
+    unless window?._?.reduce? then throw "This function requires Underscore"
 
     prefix = prefix || ''
 
@@ -347,7 +345,7 @@ class Utils
     #=> {attr: {address: {street: 'Wall'}}};
   ###
   unFlattenObj: (obj) =>
-    unless root._.reduce then throw "This function requires Underscore"
+    unless window?._?.reduce? then throw "This function requires Underscore"
 
     return _.reduce(obj, (result, value, keys) =>
       current = result
@@ -428,11 +426,4 @@ class Utils
     return obj
 
 # exports
-utils = new Utils()
-root = exports ? window
-if root._?
-  root._.mixin(utils)
-else
-  root._ = utils
-  # polyfill for Underscores's extend
-  root._.extend = utils._extend
+window?._?.mixin?(new Utils())

@@ -1,19 +1,12 @@
 # VTEX Front End Utils
 
+Common extensions used by various projects
+
+
 A extension to Underscore with utility functions shared accross projects.
 
-## Developing
 
-    npm i
-    bower i
-    grunt karma:unit
-
-## Workflow
-
-Before doing git stuff, please:
-
-    grunt dist
 
 ------
 
-VTEX - 2013
+VTEX - 2015
