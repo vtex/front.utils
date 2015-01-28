@@ -39,7 +39,7 @@ class Utils
 
 
   intAsCurrency: (value, options) =>
-    (options?.currencySymbol or @_getCurrency()) + utils.formatCurrency(value/100, options)
+    (options?.currencySymbol or @_getCurrency()) + @formatCurrency(value/100, options)
 
   ###
   Pads a string until it reaches a certain length. Non-strings will be converted.

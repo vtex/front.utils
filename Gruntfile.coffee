@@ -35,6 +35,11 @@ module.exports = (grunt) ->
         files:
           'build/<%= relativePath %>/underscore/underscore-extensions.min.js': 'build/<%= relativePath %>/underscore/underscore-extensions.js'
 
+    watch:
+      coffee:
+        files: ['src/**/*.coffee']
+        tasks: ['coffee']
+
   tasks =
     # Building block tasks
     build: ['clean', 'coffee', 'copy:pkg']
@@ -45,6 +50,7 @@ module.exports = (grunt) ->
     devtest: ['karma:dev']
     vtex_deploy: ['shell:cp', 'shell:cp_br']
     # Development tasks
+    dev: ['nolr', 'build', 'watch']
     default: ['build', 'connect', 'watch']
     devmin: ['build', 'min', 'connect:http:keepalive'] # Minifies files and serve
 
