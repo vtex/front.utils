@@ -30,10 +30,5 @@
     "type": "git",
     "url": "git://github.com/vtex/front.utils.git"
   },
-  "keywords": [
-    "coffee",
-    "utils",
-    "front"
-  ],
   "license": "MIT"
 }

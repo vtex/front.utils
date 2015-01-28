@@ -37,7 +37,7 @@ module.exports = (grunt) ->
 
   tasks =
     # Building block tasks
-    build: ['clean', 'coffee']
+    build: ['clean', 'coffee', 'copy:pkg']
     min: ['uglify'] # minifies files
     # Deploy tasks
     dist: ['build', 'min', 'copy:deploy'] # Dist - minifies files
