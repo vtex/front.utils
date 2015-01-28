@@ -1,6 +1,6 @@
 {
   "name": "front.utils",
-  "version": "3.0.0-beta",
+  "version": "3.0.0-beta.0",
   "readmeFilename": "README.md",
   "description": "Common front end utils",
   "deploy": "deploy/",
