@@ -8,13 +8,13 @@ This repo contains several directories under `src/`, each with common snippets, 
 
 Usually, they are grouped by the framework or library that they extend, i.e. `angular`, `knockout`, `underscore`.
 
-For easy access, you can expect that any given file will be exported to the global `window` under the following template:
+### Exporting
 
-`window.vtex.{directory}.{name}`
+You can expect that any given file will be exported to the global `window` under the following template:
 
-Sub-directories will be expanded into namespaces (i.e. `knockout/bindings/` will be available in `knockout.bidings`).
+`window.vtex.{path}`
 
-File names that are dashed (`my-file`) will be converted to camelCase (`myFile`).
+Directories will be expanded into namespaces and dashes (`my-file`) will be converted to camelCase (`myFile`).
 
 For example, the `common/append-template.coffee` will be exported into `window.vtex.common.appendTemplate`.
 
