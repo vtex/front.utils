@@ -1,5 +1,4 @@
 GruntVTEX = require 'grunt-vtex'
-webpack = require 'webpack'
 
 module.exports = (grunt) ->
   pkg = grunt.file.readJSON 'package.json'
