@@ -1,4 +1,5 @@
 GruntVTEX = require 'grunt-vtex'
+webpack = require 'webpack'
 
 module.exports = (grunt) ->
   pkg = grunt.file.readJSON 'package.json'
@@ -31,9 +32,16 @@ module.exports = (grunt) ->
         singleRun: false
 
     uglify:
-      underscore:
-        files:
-          'build/<%= relativePath %>/underscore/underscore-extensions.min.js': 'build/<%= relativePath %>/underscore/underscore-extensions.js'
+      main:
+        options:
+          sourceMap: true
+          sourceMapIncludeSources: true
+        files: [{
+          expand: true,
+          cwd: 'build/',
+          src: '**/*.js',
+          dest: 'build/'
+        }]
 
     watch:
       coffee:
