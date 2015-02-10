@@ -1,7 +1,8 @@
-Step =
-  active: ko.observable false
-  visited: ko.observable false
-  loading: ko.observable false
+class Step
+  constructor: ->
+    @active = ko.observable false
+    @visited = ko.observable false
+    @loading = ko.observable false
 
   enable: ->
     @visited true
