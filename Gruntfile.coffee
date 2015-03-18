@@ -47,13 +47,6 @@ module.exports = (grunt) ->
         files: ['src/**/*.coffee']
         tasks: ['coffee']
 
-    shell:
-      cp:
-        command: "aws s3 cp --recursive #{pkg.deploy} s3://vtex-io-us/#{pkg.name}/"
-      # O Bucket vtex-io usa a região São Paulo, para fallback em caso de problemas com vtex-io-us
-      cp_br:
-        command: "aws s3 cp --recursive #{pkg.deploy} s3://vtex-io/#{pkg.name}/"
-
   tasks =
     # Building block tasks
     build: ['clean', 'coffee', 'copy:pkg']
