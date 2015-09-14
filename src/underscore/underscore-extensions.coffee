@@ -130,7 +130,11 @@ class Utils
     search = /([^&=]+)=?([^&]*)/g
     plus = /\+/g
     decode = (s) ->
-      decodeURIComponent s.replace(plus, " ")
+      try
+        decodeURIComponent s.replace(plus, " ")
+      catch
+        return s.replace(plus, " ")
+
     query = window.location.search.substring(1)
     params[decode(match[1])] = decode(match[2]) while match = search.exec(query)
     return params
