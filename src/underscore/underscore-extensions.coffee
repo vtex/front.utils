@@ -37,10 +37,12 @@ class Utils
     else
       return wholePart
 
-
-  intAsCurrency: (value, options) =>
-    (options?.currencySymbol or @_getCurrency()) + @formatCurrency(value/100, options)
-
+  intAsCurrency: (value, options) ->
+    currencySymbol = if options and options.currencySymbol then options.currencySymbol else @_getCurrency()
+    startsWithCurrency = if options and options.currencySymbol then options.currencySymbol else @_getStartsWithCurrency()
+    if startsWithCurrency
+      return currencySymbol + utils.formatCurrency(value / 100, options)
+    return utils.formatCurrency(value / 100, options) + ' ' + currencySymbol
   ###
   Pads a string until it reaches a certain length. Non-strings will be converted.
 
