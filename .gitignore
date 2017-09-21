@@ -4,3 +4,6 @@ node_modules/
 .idea/
 npm-debug.log
 bower_components/
+.DS_Store
+spec/.DS_Store
+src/.DS_Store
