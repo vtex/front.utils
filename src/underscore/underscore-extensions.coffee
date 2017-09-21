@@ -416,6 +416,9 @@ class Utils
   _getCurrency: =>
     window.vtex?.i18n?.getCurrency?() or 'R$ '
 
+   _getStartsWithCurrency: =>
+    window.vtex?.i18n?.getStartsWithCurrency?() or false
+
   _getDecimalSeparator: =>
     window.vtex?.i18n?.getDecimalSeparator?() or ','
 
