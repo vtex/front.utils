@@ -41,8 +41,8 @@ class Utils
     currencySymbol = if options and options.currencySymbol then options.currencySymbol else @_getCurrency()
     startsWithCurrency = if options and options.currencySymbol then options.currencySymbol else @_getStartsWithCurrency()
     if startsWithCurrency
-      return currencySymbol + utils.formatCurrency(value / 100, options)
-    return utils.formatCurrency(value / 100, options) + ' ' + currencySymbol
+      return currencySymbol + Utils.formatCurrency(value / 100, options)
+    return Utils.formatCurrency(value / 100, options) + ' ' + currencySymbol
   ###
   Pads a string until it reaches a certain length. Non-strings will be converted.
 
@@ -415,6 +415,9 @@ class Utils
   #
   _getCurrency: =>
     window.vtex?.i18n?.getCurrency?() or 'R$ '
+
+   _getStartsWithCurrency: =>
+    window.vtex?.i18n?.getStartsWithCurrency?() or false
 
   _getDecimalSeparator: =>
     window.vtex?.i18n?.getDecimalSeparator?() or ','
