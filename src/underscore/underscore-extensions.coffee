@@ -41,8 +41,8 @@ class Utils
     currencySymbol = if options and options.currencySymbol then options.currencySymbol else @_getCurrency()
     startsWithCurrency = if options and options.currencySymbol then options.currencySymbol else @_getStartsWithCurrency()
     if startsWithCurrency
-      return currencySymbol + _.formatCurrency(value / 100, options)
-    return _.formatCurrency(value / 100, options) + ' ' + currencySymbol
+      return currencySymbol + @_formatCurrency(value / 100, options)
+    return @_formatCurrency(value / 100, options) + ' ' + currencySymbol
   ###
   Pads a string until it reaches a certain length. Non-strings will be converted.
 
