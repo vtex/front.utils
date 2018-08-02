@@ -418,7 +418,8 @@ class Utils
 
    _getStartsWithCurrency: =>
     if window.vtex?.i18n?.getStartsWithCurrency
-      return window.vtex?.i18n?.getStartsWithCurrency()
+      startsWithCurrency = window.vtex?.i18n?.getStartsWithCurrency()
+      return if startsWithCurrency? then startsWithCurrency else true
     else
       return true
 
@@ -437,5 +438,13 @@ class Utils
 
     return obj
 
-# exports
-window?._?.mixin?(new Utils())
+utils = new Utils()
+if window._? # Is Underscore namespace being used?
+	if window._.mixin? # Is it underscore?
+    window._.mixin(utils) # Mixin it
+  else
+    utils._extend(window._, utils) # Extend this thing
+else
+	window._ = utils # Take namespace
+	# polyfill for Underscores's extend
+	window._.extend = utils._extend
