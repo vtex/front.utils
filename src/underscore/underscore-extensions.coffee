@@ -418,7 +418,8 @@ class Utils
 
    _getStartsWithCurrency: =>
     if window.vtex?.i18n?.getStartsWithCurrency
-      return window.vtex?.i18n?.getStartsWithCurrency()
+      startsWithCurrency = window.vtex?.i18n?.getStartsWithCurrency()
+      return if startsWithCurrency? then startsWithCurrency else true
     else
       return true
 
