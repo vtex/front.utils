@@ -437,5 +437,13 @@ class Utils
 
     return obj
 
-# exports
-window?._?.mixin?(new Utils())
+utils = new Utils()
+if window._? # Is Underscore namespace being used?
+	if window._.mixin? # Is it underscore?
+    window._.mixin(utils) # Mixin it
+  else
+    utils._extend(window._, utils) # Extend this thing
+else
+	window._ = utils # Take namespace
+	# polyfill for Underscores's extend
+	window._.extend = utils._extend
